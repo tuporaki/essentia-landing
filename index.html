@@ -963,5 +963,35 @@
     </svg>
   </a>
 
+  <script>
+    document.querySelectorAll('a[href*="wa.me"]').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const url = this.getAttribute('href');
+        let opened = false;
+
+        gtag('event', 'click_whatsapp', {
+          event_category: 'conversion',
+          event_label: 'contacto_estudio',
+          transport_type: 'beacon',
+          event_callback: function() {
+            if (!opened) {
+              opened = true;
+              window.open(url, '_blank');
+            }
+          }
+        });
+
+        setTimeout(function() {
+          if (!opened) {
+            opened = true;
+            window.open(url, '_blank');
+          }
+        }, 500);
+      });
+    });
+  </script>
+
 </body>
 </html>
